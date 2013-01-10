@@ -7,8 +7,11 @@ module BandCamp
 
   class Request
 
-    def initialize
+    attr_reader :api_key
+
+    def initialize api_key
       @uri = URI('http://api.bandcamp.com')
+      @api_key = api_key
     end
 
     def host
@@ -21,6 +24,30 @@ module BandCamp
 
     def path= path
       @uri.path = path
+    end
+
+    def track trackid
+      self.type :track
+      self.query = { track_id: trackid }
+      dispatch
+    end
+
+    def album albumid
+      type :album
+      self.query={ album_id: albumid }
+      dispatch
+    end
+
+    def band bandid
+      type :band
+      self.query={ band_id: bandid }
+      dispatch
+    end
+
+    def discography bandid
+      type :discography
+      self.query = {band_id: bandid}
+      dispatch["discography"]
     end
 
     def type req_type
@@ -59,17 +86,17 @@ module BandCamp
     end
 
     def add_key_param params
-      {key: BandCamp.config.api_key}.merge params
+      {key: @api_key}.merge params
     end
 
     def dispatch
-      MultiJson.decode(get)
+      MultiJson.decode(get(@uri))
     end
 
     private
 
-    def get
-      Net::HTTP.get(@uri)
+    def get uri
+      Net::HTTP.get(uri)
     end
 
   end

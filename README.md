@@ -1,24 +1,9 @@
 # Bandcamp
 
-TODO: Write a gem description
+This will be a gem that aims to make interacting with the
+BandCamp.com API really easy.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'bandcamp'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bandcamp
-
-## Usage
-
-TODO: Write usage instructions here
+It's not ready for use yet.
 
 ## Contributing
 

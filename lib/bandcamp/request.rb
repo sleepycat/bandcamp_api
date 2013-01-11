@@ -44,6 +44,13 @@ module BandCamp
       dispatch
     end
 
+    def url bandcamp_url
+      type :url
+      self.query = {url: bandcamp_url}
+      response = dispatch
+      response["error"] ? nil : response
+    end
+
     def discography bandid
       type :discography
       self.query = {band_id: bandid}

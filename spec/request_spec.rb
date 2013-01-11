@@ -10,6 +10,8 @@ module BandCamp
     let(:band_json){ File.read(File.join(%w(spec fixtures pitch_black_band.json))) }
     let(:discography_json){ File.read(File.join(%w(spec fixtures pitch_black_discography.json))) }
     let(:band_error_json){ File.read(File.join(%w(spec fixtures band_error.json))) }
+    let(:url_json){ File.read(File.join(%w(spec fixtures url.json))) }
+    let(:url_error_json){ File.read(File.join(%w(spec fixtures unknown_url.json))) }
 
 
     describe '#initialize' do
@@ -116,6 +118,25 @@ module BandCamp
 
       it 'handles errors?'
     end
+
+    describe "#url" do
+      it "returns a hash of ids" do
+        request.stub(:get).and_return(url_json)
+        expect(request.url("pitchblack.bandcamp.com")).to be_a Hash
+      end
+      it "requests the proper uri" do
+        uri = URI("http://api.bandcamp.com/api/url/1/info?key=1234&url=pitchblack.bandcamp.com")
+        request.should_receive(:get).with(uri).and_return(url_json)
+        request.url "pitchblack.bandcamp.com"
+      end
+      it "returns nil for unknown uris" do
+        uri = URI("http://api.bandcamp.com/api/url/1/info?key=1234&url=foo")
+        request.should_receive(:get).with(uri).and_return(url_error_json)
+        expect(request.url "foo").to be_nil
+      end
+    end
+
+
 
     describe "#discography" do
       it "requests the proper uri" do

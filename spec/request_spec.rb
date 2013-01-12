@@ -9,7 +9,8 @@ module BandCamp
     let(:album_json){ File.read(File.join(%w(spec fixtures remixes_and_rarities_album.json))) }
     let(:band_json){ File.read(File.join(%w(spec fixtures pitch_black_band.json))) }
     let(:discography_json){ File.read(File.join(%w(spec fixtures pitch_black_discography.json))) }
-    let(:band_error_json){ File.read(File.join(%w(spec fixtures band_error.json))) }
+    let(:unknown_band_json){ File.read(File.join(%w(spec fixtures unknown_band.json))) }
+    let(:unknown_band_discography_json){ File.read(File.join(%w(spec fixtures unknown_band_discography.json))) }
     let(:url_json){ File.read(File.join(%w(spec fixtures url.json))) }
     let(:url_error_json){ File.read(File.join(%w(spec fixtures unknown_url.json))) }
 
@@ -116,7 +117,10 @@ module BandCamp
         expect(request.band(950934886)).to be_a Hash
       end
 
-      it 'handles errors?'
+      it 'returns nil when no band is found' do
+        request.stub(:get).and_return(unknown_band_json)
+        expect(request.band(1234)).to eq nil
+      end
     end
 
     describe "#url" do
@@ -150,8 +154,8 @@ module BandCamp
         expect(request.discography(950934886)).to be_an Array
       end
 
-      it 'handles errors?' do
-        request.stub(:get).and_return(band_error_json)
+      it 'returns nil when no discography is found' do
+        request.stub(:get).and_return(unknown_band_discography_json)
         expect(request.discography(1234)).to eq nil
       end
     end

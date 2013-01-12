@@ -59,6 +59,13 @@ module BandCamp
       response["discography"].empty? ? nil : response["discography"]
     end
 
+    def search name
+      type :search
+      self.query = {name: name}
+      response = dispatch
+      response["results"].empty? ? nil : response["results"]
+    end
+
     def type req_type
       self.path = case req_type
                   when :track

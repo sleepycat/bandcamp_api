@@ -14,6 +14,8 @@ module BandCamp
     let(:url_json){ File.read(File.join(%w(spec fixtures url.json))) }
     let(:url_error_json){ File.read(File.join(%w(spec fixtures unknown_url.json))) }
 
+    let(:search_json){ File.read(File.join(%w(spec fixtures search.json))) }
+    let(:no_results_json){ File.read(File.join(%w(spec fixtures search_no_results.json))) }
 
     describe '#initialize' do
       it 'sets the base uri' do
@@ -140,7 +142,23 @@ module BandCamp
       end
     end
 
+    describe "#search" do
+      it "requests the proper uri" do
+        uri = URI("http://api.bandcamp.com/api/band/3/search?key=1234&name=pitch%20black")
+        request.should_receive(:get).with(uri).and_return(search_json)
+        request.search("pitch black")
+      end
 
+      it "returns an array of hashes" do
+        request.stub(:get).and_return(search_json)
+        expect(request.search("pitch black")).to be_an Array
+      end
+
+      it 'returns nil when no results are found' do
+        request.stub(:get).and_return(no_results_json)
+        expect(request.search("foo")).to eq nil
+      end
+    end
 
     describe "#discography" do
       it "requests the proper uri" do

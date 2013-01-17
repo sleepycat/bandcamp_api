@@ -47,12 +47,19 @@ module BandCamp
     end
 
     describe '#type' do
-      it 'sets the path according to type' do
-        # types include: band, album, track, discography, url
-        request.type :discography
-        expect(request.path).to eq "/api/band/3/discography"
-        request.type :url
-        expect(request.path).to eq '/api/url/1/info'
+      # types include: band, album, track, discography, url
+      context "when type is discography" do
+        it "sets the path accordingly" do
+          request.type :discography
+          expect(request.path).to eq "/api/band/3/discography"
+        end
+      end
+
+      context "when type is url" do
+        it "sets the path accordingly" do
+          request.type :url
+          expect(request.path).to eq '/api/url/1/info'
+        end
       end
 
       it 'raises an error for unrecognized types' do
@@ -88,7 +95,12 @@ module BandCamp
         expect(request.track(1784614291)).to be_a Hash
       end
 
-      it 'handles errors?'
+      context "when track does not exist" do
+        it "returns nil" do
+          request.stub(:get).and_return("{}")
+          expect(request.track(11111)).to be_nil
+        end
+      end
 
     end
 
@@ -104,7 +116,12 @@ module BandCamp
         expect(request.album(405027664)).to be_a Hash
       end
 
-      it 'handles errors?'
+      context "when album does not exist" do
+        it "returns nil" do
+          request.stub(:get).and_return("{}")
+          expect(request.album(11111)).to be_nil
+        end
+      end
     end
 
     describe "#band" do

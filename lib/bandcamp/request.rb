@@ -1,5 +1,6 @@
 require 'bandcamp'
 require 'net/http'
+require 'multi_json'
 
 module BandCamp
 
@@ -29,13 +30,15 @@ module BandCamp
     def track trackid
       self.type :track
       self.query = { track_id: trackid }
-      dispatch
+      response = dispatch
+      response.empty? ? nil : response
     end
 
     def album albumid
       type :album
       self.query={ album_id: albumid }
-      dispatch
+      response = dispatch
+      response.empty? ? nil : response
     end
 
     def band bandid

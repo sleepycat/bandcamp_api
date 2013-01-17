@@ -1,6 +1,5 @@
-require 'multi_json'
-require 'open-uri'
 require "bandcamp/request"
+require "bandcamp/getter"
 require "bandcamp/track"
 require "bandcamp/configuration"
 require "bandcamp/version"
@@ -11,12 +10,8 @@ module BandCamp
     @configuration ||= Configuration.new
   end
 
-  def self.find_by_url url
-    api_url = "http://api.bandcamp.com/api/url/2/info?key=#{config.api_key}&url=#{url}"
-    puts api_url
-    info = MultiJson.decode(open(api_url))
-    puts info
-    Track.new info["track_id"]
+  def self.get
+    @getter ||= Getter.new(config.api_key)
   end
 
   def self.search params

@@ -3,6 +3,8 @@ require 'bandcamp'
 
 describe BandCamp do
 
+  before(:each) { BandCamp.config.api_key = "abc123" }
+
   describe ".config" do
     it 'returns a configuration object' do
       expect(BandCamp.config).to be_a (BandCamp::Configuration)

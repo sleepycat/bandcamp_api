@@ -11,7 +11,7 @@ module BandCamp
   end
 
   def self.get
-    @getter ||= Getter.new(config.api_key)
+    Getter.new(Request.new config.api_key)
   end
 
   def self.search params

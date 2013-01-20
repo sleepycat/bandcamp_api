@@ -10,8 +10,12 @@ module BandCamp
       Class.new do
 
         def track id
-          if id == 1111
+          case
+          when id.to_s.include?("1111")
             nil
+          when id.to_s.include?(',')
+            json = File.read(File.join %w(spec fixtures tracks.json))
+            MultiJson.decode json
           else
             json = File.read(File.join %w(spec fixtures a_new_day.json))
             MultiJson.decode json
@@ -62,6 +66,19 @@ module BandCamp
       end
 
     end
+
+    describe "#tracks" do
+      it "takes an array of track ids and returns an array of tracks" do
+        expect(getter.tracks 1735088360, 1739611553).to have(2).tracks
+      end
+
+      context "when no tracks are found" do
+        it "returns an empty array" do
+          expect(getter.tracks(1111,1111)).to eq []
+        end
+      end
+    end
+
 
   end
 end

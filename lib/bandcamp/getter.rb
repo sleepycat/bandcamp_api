@@ -1,3 +1,4 @@
+require 'bandcamp/band'
 require 'bandcamp/album'
 require 'bandcamp/track'
 require 'bandcamp/request'
@@ -27,6 +28,15 @@ module BandCamp
     def album album_id
       response = @request.album album_id
       response.nil? ? nil : Album.new(response)
+    end
+
+    def search band_name
+      response = @request.search band_name
+      if response.nil?
+        []
+      else
+        response["results"].collect{|band_json| Band.new band_json}
+      end
     end
 
   end

@@ -28,6 +28,12 @@ module BandCamp
           MultiJson.decode json
         end
 
+        def search name
+          return nil if name == "Foo and the Bars"
+          json = File.read(File.join %w(spec fixtures search.json))
+          MultiJson.decode json
+        end
+
       end.new
 
     end
@@ -41,7 +47,7 @@ module BandCamp
     end
 
     describe "#track" do
-      context "when passed a single track id" do
+      context "when passed a track id" do
         it "returns a Track" do
           expect(getter.track(1784614291)).to be_a Track
         end
@@ -68,8 +74,10 @@ module BandCamp
     end
 
     describe "#tracks" do
-      it "takes an array of track ids and returns an array of tracks" do
-        expect(getter.tracks 1735088360, 1739611553).to have(2).tracks
+      context "when given an array of track ids" do
+        it "returns an array of tracks" do
+          expect(getter.tracks 1735088360, 1739611553).to have(2).tracks
+        end
       end
 
       context "when no tracks are found" do
@@ -79,6 +87,18 @@ module BandCamp
       end
     end
 
+    describe "#search" do
+      context "when given a band name" do
+        it "returns an array of Band objects" do
+          expect(getter.search "pitch black").to have(5).bands
+        end
+      end
+      context "when no results are found" do
+        it "returns an empty array" do
+          expect(getter.search "Foo and the Bars").to eq []
+        end
+      end
+    end
 
   end
 end

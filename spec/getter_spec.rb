@@ -22,6 +22,12 @@ module BandCamp
           end
         end
 
+        def band name
+          return nil if name == 111111
+          json = File.read(File.join %w(spec fixtures pitch_black_band.json))
+          MultiJson.decode json
+        end
+
         def album id
           return nil if id == 1111
           json = File.read(File.join %w(spec fixtures remixes_and_rarities_album.json))
@@ -96,6 +102,20 @@ module BandCamp
       context "when no results are found" do
         it "returns an empty array" do
           expect(getter.search "Foo and the Bars").to eq []
+        end
+      end
+    end
+
+    describe "#band" do
+      context "when given a band name" do
+        it "returns a Band object" do
+          expect(getter.band(950934886).name).to eq "Pitch Black"
+        end
+      end
+
+      context "when no band is found" do
+        it "returns nil" do
+          expect(getter.band(111111)).to be_nil
         end
       end
     end

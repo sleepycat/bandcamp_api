@@ -39,5 +39,11 @@ module BandCamp
       end
     end
 
+    def band name
+      response = @request.band name
+      response.nil? ? nil : Band.new(response)
+    end
+
+
   end
 end

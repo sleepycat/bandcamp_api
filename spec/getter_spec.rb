@@ -34,6 +34,20 @@ module BandCamp
           MultiJson.decode json
         end
 
+        def url bandcamp_url
+          case bandcamp_url
+          when "http://pitchblack.bandcamp.com/"
+            {"band_id"=>950934886}
+          when "http://interchill.bandcamp.com/track/emoxygen"
+            {"band_id"=>1589471525, "track_id"=>1739611553}
+          when "http://interchill.bandcamp.com/album/power-salad"
+            {"band_id"=>1589471525, "album_id"=>165628809}
+          else
+            nil
+          end
+
+        end
+
       end.new
 
     end
@@ -98,6 +112,27 @@ module BandCamp
           expect(getter.search "Foo and the Bars").to eq []
         end
       end
+    end
+
+    describe "#url" do
+      context "when given a track url" do
+        it "returns a Track" do
+          expect(getter.url "http://interchill.bandcamp.com/track/emoxygen" ).to be_a Track
+        end
+      end
+
+      context "when given a band url" do
+        it "returns a band" do
+          expect(getter.url "http://interchill.bandcamp.com/track/emoxygen").to be_a Band
+        end
+      end
+
+      context "when given an album url" do
+        it "returns an album" do
+          expect(getter.url "http://interchill.bandcamp.com/album/power-salad").to be_an Album
+        end
+      end
+
     end
 
   end

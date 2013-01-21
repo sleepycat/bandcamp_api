@@ -39,5 +39,10 @@ module BandCamp
       end
     end
 
+    def url address
+      response = @request.url address
+      album(response["album_id"]) if response.has_key? "album_id"
+    end
+
   end
 end

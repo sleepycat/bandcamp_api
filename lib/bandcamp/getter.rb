@@ -44,6 +44,17 @@ module BandCamp
       response.nil? ? nil : Band.new(response)
     end
 
+    def url address
+      response = @request.url address
+      case
+      when response.has_key?("album_id")
+        album(response["album_id"])
+      when response.has_key?("track_id")
+        track(response["track_id"])
+      when (response.keys.length == 1) && response.has_key?("band_id")
+        band(response["band_id"])
+      end
+    end
 
   end
 end

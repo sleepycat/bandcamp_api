@@ -40,6 +40,20 @@ module BandCamp
           MultiJson.decode json
         end
 
+        def url bandcamp_url
+          case bandcamp_url
+          when "http://pitchblack.bandcamp.com/"
+            {"band_id"=>950934886}
+          when "http://pitchblack.bandcamp.com/track/a-new-day-pitch-black-remix"
+            {"band_id" => 950934886,"track_id" => 1784614291}
+          when "http://interchill.bandcamp.com/album/power-salad"
+            {"band_id"=>1589471525, "album_id"=>165628809}
+          else
+            nil
+          end
+
+        end
+
       end.new
 
     end
@@ -116,6 +130,26 @@ module BandCamp
       context "when no band is found" do
         it "returns nil" do
           expect(getter.band(111111)).to be_nil
+        end
+      end
+    end
+
+    describe "#url" do
+      context "when given a track url" do
+        it "returns a Track" do
+          expect(getter.url "http://pitchblack.bandcamp.com/track/a-new-day-pitch-black-remix" ).to be_a Track
+        end
+      end
+
+      context "when given a band url" do
+        it "returns a band" do
+          expect(getter.url  "http://pitchblack.bandcamp.com/").to be_a Band
+        end
+      end
+
+      context "when given an album url" do
+        it "returns an album" do
+          expect(getter.url "http://interchill.bandcamp.com/album/power-salad").to be_an Album
         end
       end
     end

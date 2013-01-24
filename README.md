@@ -6,8 +6,9 @@ To use it you will need to request an API key from them. For details see
 
 # Usage
 
+In your Gemfile
 ```ruby
-gem install bandcamp
+gem 'bandcamp', github: "sleepycat/bandcamp"
 ```
 
 ## Getting started:

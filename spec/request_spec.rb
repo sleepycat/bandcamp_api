@@ -1,7 +1,7 @@
 require File.expand_path('spec_helper', File.dirname(__FILE__))
 require 'bandcamp/request'
 
-module BandCamp
+module Bandcamp
   describe Request do
 
     let(:request){ Request.new "1234" }
@@ -70,14 +70,14 @@ module BandCamp
 
     describe '#query' do
       it 'creates a query string from a hash' do
-        BandCamp.config.api_key = '1234'
+        Bandcamp.config.api_key = '1234'
         request.query = {name: "pitch black", album: "ape to angel"}
         expect(request.query).to eq "key=1234&name=pitch%20black&album=ape%20to%20angel"
       end
     end
 
     it 'builds a uri' do
-      BandCamp.config.api_key = 1234
+      Bandcamp.config.api_key = 1234
       request.type :track
       request.query= {track_id: 1784614291}
       expect(request.uri).to eq "http://api.bandcamp.com/api/track/3/info?key=1234&track_id=1784614291"

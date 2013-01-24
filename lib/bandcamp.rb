@@ -4,7 +4,7 @@ require "bandcamp/track"
 require "bandcamp/configuration"
 require "bandcamp/version"
 
-module BandCamp
+module Bandcamp
 
   def self.config
     @configuration ||= Configuration.new

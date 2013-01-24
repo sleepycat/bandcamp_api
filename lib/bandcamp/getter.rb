@@ -3,7 +3,7 @@ require 'bandcamp/album'
 require 'bandcamp/track'
 require 'bandcamp/request'
 
-module BandCamp
+module Bandcamp
   class Getter
 
     def initialize request

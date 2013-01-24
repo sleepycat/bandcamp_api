@@ -1,6 +1,6 @@
 require 'bandcamp/band'
 
-module BandCamp
+module Bandcamp
   describe Band do
     let(:band){Band.new(foo: "bar") }
 

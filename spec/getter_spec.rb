@@ -3,7 +3,7 @@ require 'bandcamp/request'
 require 'bandcamp/track'
 require 'bandcamp/album'
 
-module BandCamp
+module Bandcamp
   describe Getter do
 
     let(:request) do

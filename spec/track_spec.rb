@@ -2,12 +2,12 @@ require 'spec_helper'
 require 'bandcamp/track'
 require 'multi_json'
 
-module BandCamp
+module Bandcamp
 
   describe Track do
 
-    it "includes BandCamp::Methodical" do
-      expect(Track.ancestors).to include(BandCamp::Methodical)
+    it "includes Bandcamp::Methodical" do
+      expect(Track.ancestors).to include(Bandcamp::Methodical)
     end
 
     let(:track_json){ MultiJson.decode(File.read(File.join %w(spec fixtures a_new_day.json))) }

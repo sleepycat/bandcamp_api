@@ -1,6 +1,6 @@
 require 'bandcamp/configuration'
 
-module BandCamp
+module Bandcamp
   describe Configuration do
 
     describe "#api_key" do

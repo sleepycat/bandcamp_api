@@ -1,4 +1,4 @@
-module BandCamp
+module Bandcamp
   class ConfigurationError < StandardError; end
 
   class Configuration

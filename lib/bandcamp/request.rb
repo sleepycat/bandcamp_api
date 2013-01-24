@@ -2,7 +2,7 @@ require 'bandcamp'
 require 'net/http'
 require 'multi_json'
 
-module BandCamp
+module Bandcamp
 
   # A helper class for assembling a uri to query the API
 
@@ -84,7 +84,7 @@ module BandCamp
                   when :url
                     '/api/url/1/info'
                   else
-                    raise UnknownTypeError, "The BandCamp API does not support this type of request."
+                    raise UnknownTypeError, "The Bandcamp API does not support this type of request."
                   end
     end
 

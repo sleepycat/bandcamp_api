@@ -1,9 +1,9 @@
 require 'bandcamp/methodical'
 
-module BandCamp
+module Bandcamp
   class Track
 
-    include BandCamp::Methodical
+    include Bandcamp::Methodical
 
     def initialize attrs
       to_methods attrs

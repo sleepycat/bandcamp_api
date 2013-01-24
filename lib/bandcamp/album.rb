@@ -1,6 +1,6 @@
 require 'bandcamp/methodical'
 
-module BandCamp
+module Bandcamp
   class Album
 
     include Methodical

@@ -1,6 +1,6 @@
 require 'bandcamp/album'
 
-module BandCamp
+module Bandcamp
   describe Album do
     describe ".new" do
 

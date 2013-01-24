@@ -1,4 +1,4 @@
-module BandCamp
+module Bandcamp
   module Methodical
 
     def to_methods hash

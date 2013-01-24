@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'bandcamp/methodical'
 
-module BandCamp
+module Bandcamp
 
   describe Methodical do
 

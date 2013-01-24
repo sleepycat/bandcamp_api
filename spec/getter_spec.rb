@@ -153,6 +153,12 @@ module BandCamp
         end
       end
 
+      context "when given a bad url" do
+        it "returns nil" do
+          expect(getter.url 11111).to be_nil
+        end
+      end
+
     end
 
   end

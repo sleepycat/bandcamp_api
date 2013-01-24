@@ -35,7 +35,7 @@ module BandCamp
       if response.nil?
         []
       else
-        response["results"].collect{|band_json| Band.new band_json}
+        response.collect{|band_json| Band.new band_json}
       end
     end
 

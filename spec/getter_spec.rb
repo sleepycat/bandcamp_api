@@ -37,7 +37,7 @@ module BandCamp
         def search name
           return nil if name == "Foo and the Bars"
           json = File.read(File.join %w(spec fixtures search.json))
-          MultiJson.decode json
+          MultiJson.decode(json)["results"]
         end
 
         def url bandcamp_url
@@ -152,6 +152,7 @@ module BandCamp
           expect(getter.url "http://interchill.bandcamp.com/album/power-salad").to be_an Album
         end
       end
+
     end
 
   end

@@ -8,12 +8,12 @@ To use it you will need to request an API key from them. For details see
 
 In your Gemfile
 ```ruby
-gem 'bandcamp', github: "sleepycat/bandcamp"
+gem install bandcamp_api
 ```
 
 ## Getting started:
 ```ruby
-require 'bandcamp'
+require 'bandcamp_api'
 Bandcamp.config.api_key = "your_api_key"
 ```
 

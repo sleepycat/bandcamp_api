@@ -7,7 +7,11 @@ module Bandcamp
   describe Track do
 
     it "includes Bandcamp::Methodical" do
-      expect(Track.ancestors).to include(Bandcamp::Methodical)
+      expect(track.private_methods).to include(:to_methods)
+    end
+
+    it "includes Bandcamp::Associated" do
+      expect(track.private_methods).to include(:retrieve_associated)
     end
 
     let(:track_json){ MultiJson.decode(File.read(File.join %w(spec fixtures a_new_day.json))) }
@@ -35,6 +39,13 @@ module Bandcamp
     describe "#free?" do
       it "tells you if the track is free or not" do
         expect(track.free?).to eq false
+      end
+    end
+
+    describe "#band" do
+      it "returns the associated band object" do
+        track.stub(:retrieve_associated).and_return(Band.new(foo: "bar"))
+        expect(track.band).to be_a Band
       end
     end
 

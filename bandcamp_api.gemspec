@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'bandcamp/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "bandcamp"
+  gem.name          = "bandcamp_api"
   gem.version       = Bandcamp::VERSION
   gem.authors       = ["Mike Williamson"]
   gem.email         = ["blessedbyvirtuosity@gmail.com"]

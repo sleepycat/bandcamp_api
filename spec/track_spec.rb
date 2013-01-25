@@ -49,6 +49,12 @@ module Bandcamp
       end
     end
 
+    describe "#album" do
+      it "returns the associated album object" do
+        track.stub(:retrieve_associated).and_return(Album.new(foo: "bar"))
+        expect(track.album).to be_an Album
+      end
+    end
   end
 
 end

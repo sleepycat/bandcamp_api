@@ -25,5 +25,9 @@ module Bandcamp
       retrieve_associated :band
     end
 
+    def album
+      retrieve_associated :album
+    end
+
   end
 end

@@ -11,6 +11,9 @@ module Bandcamp
       to_methods album_hash
     end
 
+    def band
+      retrieve_associated :band
+    end
 
   end
 end

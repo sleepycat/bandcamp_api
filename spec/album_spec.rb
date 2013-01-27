@@ -34,5 +34,11 @@ module Bandcamp
       end
     end
 
+    describe "#tracks" do
+      it "returns an array of Track objects" do
+        expect(album.tracks.first).to be_a Track
+      end
+    end
+
   end
 end

@@ -1,3 +1,4 @@
+require 'bandcamp/track'
 require 'bandcamp/associated'
 require 'bandcamp/methodical'
 
@@ -9,6 +10,9 @@ module Bandcamp
 
     def initialize album_hash
       to_methods album_hash
+      if instance_variable_defined? "@tracks"
+        @tracks = @tracks.map{|track| Track.new(track)}
+      end
     end
 
     def band

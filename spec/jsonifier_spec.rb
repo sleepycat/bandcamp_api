@@ -41,5 +41,19 @@ module Bandcamp
 
     end
 
+    describe ".jsonify_only" do
+      it "whitelists the given methods" do
+        klass.class.class_eval  "jsonify_only :fizz, :zig"
+        expect(klass.to_json).to eq "{\"fizz\":\"buzz\",\"zig\":\"zag\"}"
+      end
+    end
+
+    describe ".jsonify_all_except" do
+      it "blacklists the given methods" do
+        klass.class.class_eval  "jsonify_all_except :foo, :zig"
+        expect(klass.to_json).to eq "{\"fizz\":\"buzz\"}"
+      end
+    end
+
   end
 end

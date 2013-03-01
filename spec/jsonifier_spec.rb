@@ -5,22 +5,19 @@ module Bandcamp
   describe Jsonifier do
 
     let(:klass) do
-      Class.new do
+      obj = Class.new do
         include Jsonifier
 
-        def foo; "bar" end
+        def initialize
+          class << self
+            define_method(:foo){'bar'}
+          end
+        end
         def fizz; "buzz" end
         def zig; "zag" end
-
       end.new
-    end
 
-    it "provides a #to_json method" do
-      expect(klass.public_methods).to include :to_json
-    end
-
-    it "creates .jsonifiable_methods" do
-      expect(klass.class.methods).to include :jsonifiable_methods
+      obj
     end
 
     describe "#to_json" do

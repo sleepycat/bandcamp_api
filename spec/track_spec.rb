@@ -14,6 +14,10 @@ module Bandcamp
       expect(track.private_methods).to include(:retrieve_associated)
     end
 
+    it "includes Bandcamp::Jsonifier" do
+      expect(track.class.ancestors).to include Bandcamp::Jsonifier
+    end
+
     let(:track_json){ MultiJson.decode(File.read(File.join %w(spec fixtures a_new_day.json))) }
     let(:track){Track.new(track_json)}
 
@@ -55,6 +59,13 @@ module Bandcamp
         expect(track.album).to be_an Album
       end
     end
+
+    describe "#to_json" do
+      it "returns a json representation of the object" do
+        expect(MultiJson.decode(track.to_json)["title"]).to eq "A New Day (Pitch Black Remix)"
+      end
+    end
+
   end
 
 end

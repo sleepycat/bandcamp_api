@@ -1,4 +1,3 @@
-require 'bandcamp/jsonifier'
 require 'bandcamp/band'
 require 'bandcamp/request'
 require 'bandcamp/methodical'
@@ -7,11 +6,8 @@ require 'bandcamp/associated'
 module Bandcamp
   class Track
 
-    include Jsonifier
     include Methodical
     include Associated
-
-    jsonify_all_except :band, :album
 
     def initialize attrs
       to_methods attrs

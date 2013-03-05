@@ -1,3 +1,4 @@
+require 'support/be_json'
 require 'bandcamp/band'
 
 module Bandcamp
@@ -18,5 +19,10 @@ module Bandcamp
       end
     end
 
+    describe "#to_json" do
+      it "returns json" do
+        expect(band.to_json).to be_json
+      end
+    end
   end
 end

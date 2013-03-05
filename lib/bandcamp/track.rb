@@ -10,7 +10,8 @@ module Bandcamp
     include Associated
 
     def initialize attrs
-      to_methods attrs
+      @attrs_hash = attrs
+      to_methods @attrs_hash
     end
 
     def paid?
@@ -27,6 +28,10 @@ module Bandcamp
 
     def album
       retrieve_associated :album
+    end
+
+    def to_json
+      MultiJson.encode @attrs_hash
     end
 
   end

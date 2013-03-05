@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/be_json'
 require 'bandcamp/track'
 require 'multi_json'
 
@@ -53,6 +54,12 @@ module Bandcamp
       it "returns the associated album object" do
         track.stub(:retrieve_associated).and_return(Album.new(foo: "bar"))
         expect(track.album).to be_an Album
+      end
+    end
+
+    describe "#to_json" do
+      it "returns json" do
+        expect(track.to_json).to be_json
       end
     end
 

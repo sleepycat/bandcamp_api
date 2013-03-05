@@ -62,11 +62,12 @@ ape_to_angel = Bandcamp.get.album 2909726980
 => #<Bandcamp::Album:0x00000001e20c60>
 ```
 
+Bands, Albums and Tracks all have a #to_json method that does what you would
+expect a to_json method to do.
+
 ## TODO list
 
-* Making the objects a little smarter. Tracks should be able to tell you what album
-  they are from and what band did them. Same sort of thing for the other
-  objects.
+* A nice interface for requesting discographies.
 * Rails 3 integration so you can use these ojects with partials and form_for.
 * Duck typing helpers along the lines of [ActiveSupport's
   #acts_like?](http://apidock.com/rails/Object/acts_like%3F)
